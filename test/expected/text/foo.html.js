@@ -1,1 +1,0 @@
-define("foo.html", [], "<div>foo / bar \\ baz</div>\n");

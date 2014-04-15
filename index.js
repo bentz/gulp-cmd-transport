@@ -5,12 +5,12 @@ var gulp = require('gulp'),
     path = require('path'),
     _ = require('underscore'),
     script = require('./lib/script'),
-    style = require('./lib/style'),
+    css = require('./lib/css'),
     text = require('./lib/text'),
     json = require('./lib/json'),
     template = require('./lib/template');
 
-const PLUGIN_NAME = 'gulp-seajs';
+var PLUGIN_NAME = 'gulp-seajs';
 
 module.exports = function(options){
   options = _.extend({
@@ -27,20 +27,21 @@ module.exports = function(options){
 
     parsers: {
       '.js': script.jsParser,
-      '.css': style.cssParser,
+      '.css': css.cssParser,
       '.html': text.html2jsParser,
       '.json': json.jsonParser,
       '.tpl': template.tplParser,
       '.handlebars': template.handlebarsParser
-    }
+    },
 
+    styleBox: false
   }, options || {});
 
   function doTransport(file, cb) {
     if (file.isNull()) return cb(null, file);
     if (file.isStream()) return cb(new PluginError(PLUGIN_NAME, 'Streaming not supported for ' + PLUGIN_NAME));
 
-    gutil.log('transporting ' + path.join(file.cwd, path.relative(file.base, file.path)));
+    //gutil.log('transporting ' + path.join(file.cwd, path.relative(file.base, file.path)));
 
     var extname = path.extname(file.path),
         parser = options.parsers[extname];

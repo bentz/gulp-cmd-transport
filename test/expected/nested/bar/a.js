@@ -1,4 +1,0 @@
-define("bar/a", [ "./b", "./c" ], function(require, exports, module) {
-    exports.a = require("./b");
-    exports.c = require("./c");
-});

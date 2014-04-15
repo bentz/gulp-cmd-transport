@@ -1,9 +1,19 @@
 var gulp = require('gulp'),
     clean = require('gulp-clean'),
+    jshint = require('gulp-jshint'),
+    mocha = require('gulp-mocha'),
     runSeq = require('run-sequence'),
-    transport = require('./');
+    transport = require('./'),
+    jsParser = require('./lib/script').jsParser,
+    css2jsParser = require('./lib/css').css2jsParser;
 
 var tasks = {
+  expand: {
+    src: '**/*',
+    cwd: 'test/cases/expand',
+    dest: 'test/expected/expand'
+  },
+
   // single file without any dependencies
   single: {
     src: '**/*.js',
@@ -60,11 +70,54 @@ var tasks = {
     dest: 'test/expected/alias'
   },
 
+  //parsing css
+  css: {
+    options: {
+      alias: {
+        'button': 'alice/button/1.0.0/button.css'
+      }
+    },
+    src: '*.css',
+    cwd: 'test/cases/css',
+    dest: 'test/expected/css'
+  },
+
   // parsing html into js
   text: {
     src: '*.html',
     cwd: 'test/cases/text',
     dest: 'test/expected/text'
+  },
+
+  tpl: {
+    src: '*.tpl',
+    cwd: 'test/cases/tpl',
+    dest: 'test/expected/tpl'
+  },
+
+  css2js: {
+    options: {
+      parsers: {
+        '.css': css2jsParser
+      }
+    },
+    src: '*.css',
+    cwd: 'test/cases/css2js',
+    dest: 'test/expected/css2js'
+  },
+
+  style: {
+    options: {
+      parsers: {
+        '.css': css2jsParser,
+        '.js': jsParser
+      },
+      styleBox: ["a.css"],
+      idleading: 'arale/widget/1.0.0/'
+    },
+    src: '*.{js,css}',
+    cwd: 'test/cases/style',
+    dest: 'test/expected/style'
   },
 
   duplicate: {
@@ -126,5 +179,19 @@ gulp.task('clean', function(){
 gulp.task('transport', function(cb){
   runSeq('clean', taskNames, cb);
 });
+gulp.task('jshint', function(){
+  return gulp.src(['gulpfile.js', 'lib/**/*.js', 'index.js'])
+    .pipe(jshint())
+    .pipe(jshint.reporter('default'));
+});
+gulp.task('mocha', function(){
+  return gulp.src('test/transport.js')
+    .pipe(mocha({
+      reporter: 'list'
+    }));
+});
 
-gulp.task('default', ['transport']);
+gulp.task('test', function(cb){
+  runSeq('clean', taskNames, 'mocha', 'clean');
+});
+gulp.task('default', ['jshint']);

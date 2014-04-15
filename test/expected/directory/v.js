@@ -1,1 +1,0 @@
-define("v", [], function(require, exports, module) {});

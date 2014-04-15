@@ -4,7 +4,7 @@ var should = require('should');
 
 describe('file', function() {
   it('expand', function() {
-    var exist = fs.existsSync('test/expected/expand-debug.js');
+    var exist = fs.existsSync('test/expected/expand.js');
     should.exist(exist);
   });
 
@@ -13,9 +13,9 @@ describe('file', function() {
   var dirs = fs.readdirSync(base);
   dirs.forEach(function(dir) {
     var files = readDirs(path.join(base, dir)).filter(function(file) {
-      return /\.expect$/.test(file);
+      return (/\.expect$/.test(file));
     });
-    if (files.length) {
+    if (files.length && fs.existsSync(path.join(expected, dir))) {
       it('should test ' + dir, function() {
         files.forEach(function(file) {
           var expect = fs.readFileSync(path.join(base, dir, file))

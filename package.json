@@ -5,12 +5,16 @@
     "gulp-util": "~2.2.14",
     "underscore": "~1.6.0",
     "gulp": "~3.6.0",
-    "css": "~1.6.0"
+    "css": "~1.6.0",
+    "clean-css": "~2.1.8",
+    "handlebars": "~2.0.0-alpha.2"
   },
   "devDependencies": {
     "should": "~3.3.0",
     "gulp-clean": "~0.2.4",
-    "run-sequence": "~0.3.6"
+    "run-sequence": "~0.3.6",
+    "gulp-jshint": "~1.5.3",
+    "gulp-mocha": "~0.4.1"
   },
   "scripts": {
     "test": "gulp test"
