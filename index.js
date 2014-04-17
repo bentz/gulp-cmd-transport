@@ -10,7 +10,7 @@ var gulp = require('gulp'),
     json = require('./lib/json'),
     template = require('./lib/template');
 
-var PLUGIN_NAME = 'gulp-seajs';
+var PLUGIN_NAME = 'gulp-cmd-transport';
 
 module.exports = function(options){
   options = _.extend({
