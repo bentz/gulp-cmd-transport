@@ -1,4 +1,7 @@
 {
+  "name": "gulp-cmd-transport",
+  "author": "bentz <lv.bentz@gmail.com>",
+  "description": "port from grunt-cmd-transport",
   "dependencies": {
     "cmd-util": "~0.3.5",
     "event-stream": "~3.1.1",
@@ -18,5 +21,6 @@
   },
   "scripts": {
     "test": "gulp test"
-  }
+  },
+  "license": "MIT"
 }
