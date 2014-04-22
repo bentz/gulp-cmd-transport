@@ -1,7 +1,11 @@
 {
   "name": "gulp-cmd-transport",
-  "author": "bentz <lv.bentz@gmail.com>",
-  "description": "port from grunt-cmd-transport",
+  "version": "0.1.0",
+  "description": "ported from grunt-cmd-transpor.",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
   "dependencies": {
     "cmd-util": "~0.3.5",
     "event-stream": "~3.1.1",
@@ -22,5 +26,17 @@
   "scripts": {
     "test": "gulp test"
   },
-  "license": "MIT"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bentz/gulp-cmd-transport"
+  },
+  "keywords": [
+    "gulpplugin"
+  ],
+  "author": "Bentz <lv.bentz@gmail.com> (https://github.com/bentz)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bentz/gulp-cmd-transport/issues"
+  },
+  "homepage": "https://github.com/bentz/gulp-cmd-transport"
 }
